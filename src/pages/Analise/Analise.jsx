@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Analise.module.css";
 
 // URL do backend FastAPI (Render)
-const IA_API_URL = import.meta.env.VITE_IA_API_URL;
+const IA_API_URL = "https://dermaia-backend-fastapi.onrender.com";
 
 export default function Analise() {
   const [preview, setPreview] = useState(null);
