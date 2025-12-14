@@ -6,6 +6,7 @@ import styles from "./Analise.module.css";
 const IA_API_URL = "https://dermaia-backend-fastapi.onrender.com";
 
 
+
 export default function Analise() {
   const [preview, setPreview] = useState(null);
 
