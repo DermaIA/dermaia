@@ -26,11 +26,13 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: #0b1a44;
-  padding: 0.8rem 3rem; /* margem maior para afastar das bordas */
-  height: 80px; /*aumenta a altura da barra*/
+  padding: 0.8rem 3rem; /* margem maior para afastar das borda */
+  height: 80px; /*aumenta a altura da barra */
   top:0%;
   z-index:1000;
 }
+
+
 
 .profile-img {
   width: 42px;
@@ -422,13 +424,12 @@ main {
 }
 
 
-
 /* FOOTER */
 .footer-top-bar {
   background-color: #0B1A44;
   padding: 18px 0;
   display: flex;
-  height:110px;
+  height: 110px;
   justify-content: center;
   align-items: center;
 }
@@ -453,9 +454,8 @@ main {
 
 .footer-container {
   display: flex;
-  /*grid-template-columns: repeat(3, 1fr);*/
   flex-wrap: wrap;
- justify-content: center;
+  justify-content: center;
   align-items: flex-start;
   gap: 80px;
   margin-bottom: 40px;
@@ -473,7 +473,6 @@ main {
   border-bottom: 2px solid #2e4eff;
   display: inline-block;
   padding-bottom: 4px;
-  
 }
 
 .footer-section p {
@@ -503,12 +502,7 @@ main {
   color: #ffffff;
 }
 
-
-.footer-section:nth-child(2) {
-  margin-left: 80px;
-}
-
-
+/* SOCIAL */
 .footer-social {
   display: flex;
   align-items: center;
@@ -536,12 +530,7 @@ main {
   color: #aab3c7;
 }
 
-
-.social-icons {
-  display: flex;
-  gap: 20px;
-}
-
+/* ICONS */
 .icon {
   width: 64px;
   height: 64px;
@@ -554,28 +543,25 @@ main {
   cursor: pointer;
 }
 
-/* Efeito geral de hover */
 .icon:hover {
   transform: translateY(-4px);
 }
 
-/* Gmail */
-.icon.gmail:hover{
+.icon.gmail:hover {
   box-shadow: 0 8px 25px rgba(234, 67, 53, 0.8);
 }
 
-/* LinkedIn */
 .icon.linkedin:hover {
   box-shadow: 0 8px 25px rgba(10, 102, 194, 0.8);
 }
 
-/* Instagram */
 .icon.instagram:hover {
   box-shadow: 0 8px 25px rgba(225, 48, 108, 0.8);
 }
 
-
-/* Responsivo */
+/* ========================= */
+/* MOBILE (ÚNICO LUGAR QUE EMPILHA) */
+/* ========================= */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -584,17 +570,23 @@ main {
     gap: 40px;
   }
 
-  .footer-links {
-    flex-direction: column;
-    gap: 30px;
+  .footer-section {
+    min-width: unset;
+    max-width: 100%;
   }
-}
 
-/* Responsividade */
-@media (min-width: 900px) {
-  .team-grid {
-    grid-template-columns: 1fr 1fr;
-    gap:18px;
+  .footer-section p {
+    max-width: 100%;
+  }
+
+  .footer-links ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links ul li {
+    text-align: center;
   }
 }
 
@@ -618,13 +610,17 @@ main {
 
 
 
+/* MENU DE ACESSIBILIDADE */
 #userwayAccessibilityIcon {
-  bottom: -650px !important;
-  top: auto !important;
+  position: fixed !important;
+  bottom: 20px !important;
   left: 20px !important;
+  top: auto !important;
   right: auto !important;
-  position: fixed !important;
+  z-index: 9999 !important;
 }
+
+
 /* ============================
    📱 RESPONSIVO GERAL
    ============================ */
@@ -769,20 +765,16 @@ main {
     height: 50px;
   }
 
-  /* WAVES */
-  .wave-section {
-    height: 150px;
-  }
 
-  .wave-section .wave-top {
-    height: 90px;
-  }
-
-  /* USERWAY (acessibilidade) */
+  
+/* Mobile */
+@media (max-width: 768px) {
   #userwayAccessibilityIcon {
-    bottom: 20px !important;
-    left: 20px !important;
+    bottom: 80px !important;
+    left: 16px !important;
+    top: auto !important;
   }
+}
 }
 
 /* ============================

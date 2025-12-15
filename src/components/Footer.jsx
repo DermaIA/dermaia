@@ -19,8 +19,8 @@ export default function Footer() {
             <h3>Institucional</h3>
             <ul>
               <li><a href="SobreNos">Sobre nós</a></li>
-              <li><a href="#solucoes">Soluções</a></li>
-              <li><a href="#insights">Insights</a></li>
+              <li><a href="EnviarFoto">Como funciona - nossa IA</a></li>
+              <li><a href="SaibaMaisPlanos">Planos e assinaturas</a></li>
             </ul>
           </div>
 
@@ -34,7 +34,7 @@ export default function Footer() {
 
           <div className="footer-section footer-social">
             <div className="icon gmail">
-              <a href="#" className="social-icon"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="gmail"/></a>
+              <a href="mailto:dermaia.app@gmail.com" className="social-icon"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="gmail"/></a>
             </div>
             <div className="icon linkedin">
               <a href="https://www.linkedin.com/in/dermaia" className="social-icon"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="linkedin"/></a>

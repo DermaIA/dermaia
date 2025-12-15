@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import styles from './WeeklyForecast.module.css';
 
 export default function WeeklyForecast({ data }) {
@@ -6,7 +7,7 @@ export default function WeeklyForecast({ data }) {
     <div className={styles.container}>
       {data.map((day) => (
         <div key={day.date} className={styles.row}>
-          <div className={styles.day}>{format(parseISO(day.date), 'EEE')}</div>
+          <div className={styles.day}>{format(parseISO(day.date), 'EEE', { locale: ptBR })}</div>
           <div className={styles.rain}>Chuva {day.day.daily_chance_of_rain}%</div>
           <div className={styles.condition}>
             <img src={day.day.condition.icon} alt="" />

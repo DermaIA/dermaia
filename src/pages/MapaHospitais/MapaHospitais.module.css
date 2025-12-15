@@ -120,6 +120,8 @@
   background: rgba(255, 255, 255, 0.25);
 }
 
+
+
 /* DERMAX */
 .heroRight {
   width: 380px;
@@ -127,14 +129,71 @@
   justify-content: flex-end;
 }
 
+/* ===== ANIMAÇÃO DO ROBÔ ===== */
+
 .robotWrap {
   width: 340px;
+  opacity: 0;
+  transform: translateX(120%);
+  will-change: transform, opacity;
 }
 
-.robotoWrap img {
+/* Desktop / padrão */
+.robotEnter {
+  animation: robotEnterRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes robotEnterRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Tablet e Mobile → entra de baixo */
+@media (max-width: 1024px) {
+  .robotWrap {
+    transform: translateY(60px);
+  }
+
+  .robotEnter {
+    animation: robotEnterBottom 1s ease-out forwards;
+  }
+
+  @keyframes robotEnterBottom {
+    from {
+      transform: translateY(60px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* A MÁSCARA VAI NA IMAGEM */
+.robotWrap img {
   width: 100%;
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
   height: auto;
   display: block;
+
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 70%,
+    rgba(0,0,0,0) 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 70%,
+    rgba(0,0,0,0) 100%
+  );
 }
 
 

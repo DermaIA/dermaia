@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./MapaHospitais.module.css";
-import { FaMapMarkedAlt } from "react-icons/fa";
+import { MdMyLocation } from "react-icons/md";
 import AiSection from "../../components/AiSection";
 
 
@@ -11,6 +11,7 @@ const SEARCH_RADIUS_METERS = 5000;
 const MAP_ZOOM_DEFAULT = 13;
 
 export default function MapaHospitais() {
+  const [animateRobot, setAnimateRobot] = useState(false);
   const mapRef = useRef(null);
   const markersLayerRef = useRef(null);
 
@@ -26,6 +27,7 @@ export default function MapaHospitais() {
   const [activeTab, setActiveTab] = useState("hospital");     // NOVO
   const [searchQuery, setSearchQuery] = useState("");         // NOVO
 
+
   // Inicializa o mapa
   useEffect(() => {
     if (!mapRef.current) {
@@ -37,6 +39,14 @@ export default function MapaHospitais() {
       markersLayerRef.current = L.layerGroup().addTo(mapRef.current);
     }
   }, []);
+
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setAnimateRobot(true);
+  }, 100); // pequeno delay para suavidade
+
+  return () => clearTimeout(timer);
+}, []);
 
   // Geocodificação
   const geocodeAddress = async (addr) => {
@@ -206,16 +216,17 @@ export default function MapaHospitais() {
                   <button className={styles.btnSearch} onClick={handleSearch} disabled={loading}>
                     {loading ? "Buscando..." : "Pesquisar"}
                   </button>
-                  <button className={styles.btnLocation} onClick={handleUseLocation} title="Usar minha localização">
-                    <FaMapMarkedAlt />
-                  </button>
+                 <button className={styles.btnLocation} onClick={handleUseLocation} title="Usar minha localização" aria-label="Usar minha localização"
+>               <MdMyLocation />
+                </button>
+
                 </div>
               </div>
             </div>
           </div>
 
           <div className={styles.heroRight}>
-            <div className={styles.robotWrap}>
+            <div className={`${styles.robotWrap} ${ animateRobot ? styles.robotEnter : ""}`}>
               <img src="/assets/dermax2.png" alt="Robô médico DermaIA" />
             </div>
           </div>
