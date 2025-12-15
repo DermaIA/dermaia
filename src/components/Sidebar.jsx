@@ -62,7 +62,7 @@ export default function Sidebar({ open, onClose }) {
         <li><a href="Gamificacao">Desafios de proteção</a></li>
         <li><a href="MapaHospitais">Mapa de hospitais e clínicas próximas</a></li>
         <li><a href="Blog">Dicas de prevenção</a></li>
-        <li><a href="BaixaSugestao">Sobre nós</a></li>
+        <li><a href="SobreNos">Sobre nós</a></li>
         <li><a href="FaleConosco">Perguntas frequentes (FAQ)</a></li>
       </ul>
     </nav>
