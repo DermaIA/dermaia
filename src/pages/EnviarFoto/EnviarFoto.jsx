@@ -1,23 +1,23 @@
 import React, { useState } from "react";
+import imageCompression from "browser-image-compression";
 import styles from "./EnviarFoto.module.css";
-
 
 export default function EnviarFoto() {
   const [fileName, setFileName] = useState("Nenhum arquivo selecionado");
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
-    setFile(selected);
+    if (!selected) return;
 
+    setFile(selected);
     setFileName(
-      selected
-        ? `${selected.name} (${Math.round(selected.size / 1024)} KB)`
-        : "Nenhum arquivo selecionado"
+      `${selected.name} (${Math.round(selected.size / 1024)} KB)`
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!file) {
@@ -25,61 +25,46 @@ export default function EnviarFoto() {
       return;
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      alert("Arquivo muito grande (máx. 10 MB).");
-      return;
-    }
+    setLoading(true);
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      localStorage.setItem("foto_enviada", reader.result);
+    try {
+      const options = {
+        maxSizeMB: 2,
+        maxWidthOrHeight: 1024,
+        useWebWorker: true,
+      };
+
+      const compressedFile = await imageCompression(file, options);
+
+      console.log(
+        "Imagem pronta para análise:",
+        Math.round(compressedFile.size / 1024),
+        "KB"
+      );
+
+      // 👉 AQUI você chamaria a API de análise
+      // await analisarImagem(compressedFile);
+
+      // Redireciona sem salvar imagem
       window.location.href = "/analise";
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error("Erro ao processar imagem:", err);
+      alert("Erro ao processar a imagem.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <>
     <main className={styles.wrapper}>
       <div className={styles.card}>
         <h1 className={styles.title}>Envie a foto da mancha</h1>
 
-        <p className={styles.lead}>
-          Siga estas instruções cuidadosas para obter uma imagem útil — isso melhora a
-          qualidade da análise e ajuda na prevenção.
-        </p>
-
-        {/* --- DICAS --- */}
-        <div className={styles.tips}>
-          <div className={styles.tip}>📷 Limpe a lente antes de fotografar.</div>
-
-          <div className={styles.tip}>
-            💡 Utilize luz natural indireta. Evite sombras sobre a mancha.
-          </div>
-
-          <div className={styles.tip}>
-            📏 Coloque um objeto de escala ao lado da mancha (régua/moeda).
-          </div>
-
-          <div className={styles.tip}>
-            🎯 Mantenha o telefone estável e tire 2–3 fotos com diferentes distâncias.
-          </div>
-
-          <div className={styles.tip}>
-            🧼 Se possível, lave suavemente a área antes de fotografar.
-          </div>
-
-          <div className={styles.tip}>
-            🚫 Não use filtros ou edições — envie exatamente a foto original.
-          </div>
-        </div>
-
-        {/* --- UPLOAD --- */}
         <form onSubmit={handleSubmit} className={styles.form}>
           <label className={styles.fileInput}>
             <span className={styles.fileLabel}>Escolher foto</span>
             <span className={styles.fileName}>{fileName}</span>
-            
+
             <input
               type="file"
               accept="image/*"
@@ -88,16 +73,11 @@ export default function EnviarFoto() {
             />
           </label>
 
-          <button type="submit" className={styles.submit}>
-            Enviar e Analisar
+          <button type="submit" className={styles.submit} disabled={loading}>
+            {loading ? "Processando..." : "Enviar e Analisar"}
           </button>
-
-          <p className={styles.note}>
-            Nota: O Derma IA é uma ferramenta de triagem preventiva — <strong>não fornece diagnóstico médico.</strong> Em caso de dúvida, consulte um profissional de saúde.
-          </p>
         </form>
       </div>
     </main>
-    </>
   );
 }
