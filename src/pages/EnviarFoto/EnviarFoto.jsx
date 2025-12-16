@@ -79,10 +79,11 @@ export default function EnviarFoto() {
           <label className={styles.fileInput}>
             <span className={styles.fileLabel}>Escolher foto</span>
             <span className={styles.fileName}>{fileName}</span>
-
+            
             <input
               type="file"
               accept="image/*"
+              capture="environment"
               onChange={handleFileChange}
             />
           </label>
